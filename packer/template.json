@@ -1,0 +1,59 @@
+{
+  "builders": [{
+    "boot_wait": "2s",
+    "disk_size": 40960,
+    "guest_additions_mode": "disable",
+    "guest_os_type": "MacOS1011_64",
+    "hard_drive_interface": "sata",
+    "iso_checksum_type": "md5",
+    "iso_checksum": "{{user `iso_checksum`}}",
+    "iso_interface": "sata",
+    "iso_url": "{{user `iso_url`}}",
+    "shutdown_command": "echo '{{user `username`}}'|sudo -S shutdown -h now",
+    "ssh_port": 22,
+    "ssh_username": "{{user `username`}}",
+    "ssh_password": "{{user `password`}}",
+    "ssh_wait_timeout": "10000s",
+    "type": "virtualbox-iso",
+    "vboxmanage": [
+      ["modifyvm", "{{.Name}}", "--audiocontroller", "hda"],
+      ["modifyvm", "{{.Name}}", "--boot1", "dvd"],
+      ["modifyvm", "{{.Name}}", "--boot2", "disk"],
+      ["modifyvm", "{{.Name}}", "--chipset", "ich9"],
+      ["modifyvm", "{{.Name}}", "--cpuidset", "00000001", "000306a9", "00020800", "80000201", "178bfbff"],
+      ["modifyvm", "{{.Name}}", "--firmware", "efi"],
+      ["modifyvm", "{{.Name}}", "--hpet", "on"],
+      ["modifyvm", "{{.Name}}", "--keyboard", "usb"],
+      ["modifyvm", "{{.Name}}", "--memory", "4096"],
+      ["modifyvm", "{{.Name}}", "--cpus", "2"],
+      ["modifyvm", "{{.Name}}", "--mouse", "usbtablet"],
+      ["modifyvm", "{{.Name}}", "--vram", "128"]
+    ]
+  }],
+  "min_packer_version": "0.7.0",
+  "post-processors": [{
+    "type": "vagrant",
+    "compression_level": 9,
+    "keep_input_artifact": true
+  }],
+  "provisioners": [{
+    "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
+    "scripts": [
+      "scripts/vagrant.sh",
+      "scripts/shrink.sh"
+    ],
+    "environment_vars": [
+      "INSTALL_VAGRANT_KEYS={{user `install_vagrant_keys`}}",
+      "PASSWORD={{user `password`}}",
+      "USERNAME={{user `username`}}"
+    ],
+    "type": "shell"
+  }],
+  "variables": {
+    "install_vagrant_keys": "true",
+    "iso_checksum": "aff67f81dfbad7afda56c423473d61a6",
+    "iso_url": "OSX_InstallESD_10.9.3_13D65.dmg",
+    "password": "vagrant",
+    "username": "vagrant"
+  }
+}

@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+# Create base box
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+USERNAME=vagrant
+PASSWORD=vagrant
+OUT_DIR="$SCRIPT_DIR/out"
+
+DEFAULT_APP=$(find /Applications -name "Install OS X *.app" -depth 1)
+
+usage() {
+    cat <<EOF
+Usage:
+$(basename "$0") [$DEFAULT_APP]
+
+Description:
+Create base VirtualBox image
+
+EOF
+}
+
+prepare_iso() {
+
+  local iso_url=$(find "$OUT_DIR" -name "*.dmg" | head -n 1)
+  if [ -f "$iso_url" ];
+  then
+      echo "==> Using previous prepared `basename \"$iso_url\"`"
+  else
+      echo "==> Preparing InstallESD.dmg from \"$app\""
+      echo "==> Please input your sudo password"
+      sudo $SCRIPT_DIR/prepare_iso/prepare_iso.sh -u "$USERNAME" -p "$PASSWORD" "$app" "$OUT_DIR"
+      iso_url=$(find "$OUT_DIR" -name "*.dmg" | head -n 1)
+  fi
+
+  local iso_md5=$(cat "$iso_url.md5")
+
+  export ISO_URL=$iso_url
+  export ISO_MD5=$iso_md5
+}
+
+iso_to_box() {
+
+  local box=$(find "$SCRIPT_DIR/packer" -name "*.box" | head -n 1)
+  if [ -f "$box" ];
+  then
+      echo "==> Using previous box `basename \"$box\"`"
+  else
+      echo "==> Generating vagrant box"
+      cd "$SCRIPT_DIR/packer" && time packer build \
+        -var iso_checksum="$ISO_MD5" \
+        -var iso_url="$ISO_URL" \
+        -var username="$USERNAME" \
+        -var password="$PASSWORD" \
+        -only=virtualbox-iso \
+        template.json
+
+      box=$(find "$SCRIPT_DIR/packer" -name "*.box" | head -n 1)
+  fi
+}
+
+main() {
+
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+      usage
+      exit 0
+  fi
+
+  app=${1:-"$DEFAULT_APP"}
+  if [ ! -d "$app" ]; then
+      echo "error: $app is a not valid installation source"
+      exit 1
+  fi
+
+  prepare_iso
+  iso_to_box
+
+  echo "==> Adding box to vagrant"
+  echo vagrant box add "$box" --name osx-base --force
+}
+
+main "$@"
