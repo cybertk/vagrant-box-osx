@@ -31,24 +31,38 @@
     ]
   }],
   "min_packer_version": "0.7.0",
-  "post-processors": [{
-    "type": "vagrant",
-    "compression_level": 9,
-    "keep_input_artifact": true
-  }],
-  "provisioners": [{
-    "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
-    "scripts": [
-      "scripts/vagrant.sh",
-      "scripts/shrink.sh"
-    ],
-    "environment_vars": [
-      "INSTALL_VAGRANT_KEYS={{user `install_vagrant_keys`}}",
-      "PASSWORD={{user `password`}}",
-      "USERNAME={{user `username`}}"
-    ],
-    "type": "shell"
-  }],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": 9,
+      "keep_input_artifact": true
+    },
+    {
+      "type": "atlas",
+      "token": "{{user `atlas_token`}}",
+      "artifact": "osx/el-capitan",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "version": "0.0.1"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "chmod +x {{ .Path }}; sudo {{ .Vars }} {{ .Path }}",
+      "scripts": [
+        "scripts/vagrant.sh",
+        "scripts/shrink.sh"
+      ],
+      "environment_vars": [
+        "INSTALL_VAGRANT_KEYS={{user `install_vagrant_keys`}}",
+        "PASSWORD={{user `password`}}",
+        "USERNAME={{user `username`}}"
+      ],
+      "type": "shell"
+    }
+  ],
   "variables": {
     "install_vagrant_keys": "true",
     "iso_checksum": "aff67f81dfbad7afda56c423473d61a6",
