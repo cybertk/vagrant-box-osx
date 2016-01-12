@@ -43,22 +43,24 @@ prepare_iso() {
 }
 
 iso_to_box() {
+  declare template=$1
+  local workspace="$(dirname $template)"
+  local box=$(find "$workspace" -name "*.box" | head -n 1)
 
-  local box=$(find "$SCRIPT_DIR/packer" -name "*.box" | head -n 1)
   if [ -f "$box" ];
   then
       echo "==> Using previous box `basename \"$box\"`"
   else
       echo "==> Generating vagrant box"
-      cd "$SCRIPT_DIR/packer" && time packer build \
+      cd "$workspace" && time packer build \
         -var iso_checksum="$ISO_MD5" \
         -var iso_url="$ISO_URL" \
         -var username="$USERNAME" \
         -var password="$PASSWORD" \
         -only=virtualbox-iso \
-        template.json
+        $(basename "$template")
 
-      box=$(find "$SCRIPT_DIR/packer" -name "*.box" | head -n 1)
+      box=$(find "$workspace" -name "*.box" | head -n 1)
   fi
 }
 
@@ -76,7 +78,7 @@ main() {
   fi
 
   prepare_iso
-  iso_to_box
+  iso_to_box "el-capitan/template.json"
 
   echo "==> Adding box to vagrant"
   echo vagrant box add "$box" --name osx-base --force
