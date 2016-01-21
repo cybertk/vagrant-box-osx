@@ -1,0 +1,17 @@
+---
+language: objective-c
+osx_image: xcode7.2
+
+env:
+  global:
+    - LANG=en_US.UTF-8
+    - LC_ALL=en_US.UTF-8
+    - LANGUAGE=en_US.UTF-8
+
+install:
+  - brew install argon/mas/mas
+
+script:
+  # AppID is find with 'Copy Link' in MAS
+  - mas account
+  - mas install 1018109117
