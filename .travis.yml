@@ -9,9 +9,10 @@ env:
     - LANGUAGE=en_US.UTF-8
 
 install:
-  - brew install argon/mas/mas
+  - brew install cybertk/formulae/mas --HEAD
 
 script:
   # AppID is find with 'Copy Link' in MAS
-  - mas account
-  - mas install 1018109117
+- mas login --appleId $APPLE_ID --password $APPLE_ID_PASSWORD
+- mas install 1018109117
+#- mas account
