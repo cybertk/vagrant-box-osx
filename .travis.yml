@@ -1,18 +1,31 @@
 ---
 language: objective-c
-osx_image: xcode7.2
-
-env:
-  global:
-    - LANG=en_US.UTF-8
-    - LC_ALL=en_US.UTF-8
-    - LANGUAGE=en_US.UTF-8
+osx_image: xcode7.1
+rvm: system
 
 install:
-  - brew install cybertk/formulae/mas --HEAD
+# - brew install argon/mas/mas
+- gem list
+- sudo gem install bundler imgurr
+- env
+- brew install cybertk/formulae/mas --HEAD --env=std
 
 script:
-  # AppID is find with 'Copy Link' in MAS
-- mas login --appleId $APPLE_ID --password $APPLE_ID_PASSWORD
+- sw_vers
+- ls -l /Applications
+- mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
+- sleep 2; sudo pkill -KILL "App Store"
+- mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
+- mas install 836500024
+- screencapture -Sx screenshot.jpg
+- imgurr upload screenshot.jpg
+# - mas account
+# - mas list
+# # AppID is find with 'Copy Link' in MAS
 - mas install 1018109117
-#- mas account
+- screencapture -Sx screenshot.jpg
+- imgurr upload screenshot.jpg
+
+notifications:
+  email: false
+

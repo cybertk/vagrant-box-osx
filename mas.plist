@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+    <string>com.cybertk.mas</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>StandardErrorPath</key>
+    <string>/tmp/mas.log</string>
+    <key>StandardOutPath</key>
+    <string>/tmp/mas.log</string>
+	<key>ProgramArguments</key>
+	<array>
+        <string>/usr/local/bin/mas</string>
+		<string>login</string>
+		<string>--appleId</string>
+		<string>$APPLE_ID</string>
+		<string>--password</string>
+		<string>$APPLE_ID_PASSWORD</string>
+	</array>
+</dict>
+</plist>
