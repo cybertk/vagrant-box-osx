@@ -4,7 +4,6 @@ osx_image: xcode7.1
 
 install:
 # - brew install argon/mas/mas
-- gem list
 - sudo gem install bundler imgurr
 - env
 - brew install cybertk/formulae/mas --HEAD --env=std
@@ -12,8 +11,6 @@ install:
 script:
 - sw_vers
 - ls -l /Applications
-- mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
-- sleep 2; sudo pkill -KILL "App Store"
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
 - mas install 836500024
 - screencapture -Sx screenshot.jpg
