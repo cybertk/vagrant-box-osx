@@ -10,7 +10,6 @@ install:
 
 script:
 - sw_vers
-- ls -l /Applications
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
 - mas install 836500024
 - screencapture -Sx screenshot.jpg
@@ -22,6 +21,7 @@ script:
 - screencapture -Sx screenshot.jpg
 - imgurr upload screenshot.jpg
 
+- ls -l /Applications
 - ./create_box
 
 notifications:
