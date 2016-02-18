@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-forward_vnc() {
-    declare host="$1" key="$2"
+forward_port() {
+    declare local_port="$1" remote_port="$2" host="$3" key="$4"
 
     openssl rsa -in "$key" -pubout -outform DER | openssl md5 -c
     ssh -nNT \
         -f \
-        -R 5900:localhost:5900 \
+        -R "$remote_port":localhost:"$local_port" \
         -i "$key" \
         -o "IdentitiesOnly yes" \
         -o "UserKnownHostsFile /dev/null" \
@@ -26,9 +26,11 @@ setup_vnc() {
 
 main() {
     setup_vnc 0
-    forward_vnc 107.170.213.32 debug.key
+    forward_port 5900 5900 107.170.213.32 debug.key
 
-    echo "VNC server is ready, connect at $host with password"
+    forward_port 22 5922 107.170.213.32 debug.key
+
+    echo "VNC server is ready, connect at 107.170.213.32 with password"
     while true; do sleep 30; echo .; done
 }
 
