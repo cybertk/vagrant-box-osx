@@ -31,3 +31,5 @@ main() {
     echo "VNC server is ready, connect at $host with password"
     while true; do sleep 30; echo .; done
 }
+
+main "$@"
