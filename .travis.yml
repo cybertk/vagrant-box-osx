@@ -22,6 +22,8 @@ script:
 - screencapture -Sx screenshot.jpg
 - imgurr upload screenshot.jpg
 
+- ./create_box
+
 notifications:
   email: false
 

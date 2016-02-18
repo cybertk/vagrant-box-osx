@@ -10,7 +10,7 @@ USERNAME=vagrant
 PASSWORD=vagrant
 OUT_DIR="$SCRIPT_DIR/out"
 
-DEFAULT_APP=$(find /Applications -name "Install OS X *.app" -depth 1)
+DEFAULT_APP=$(find /Applications -name "OS X *.app" -depth 1)
 
 usage() {
     cat <<EOF
