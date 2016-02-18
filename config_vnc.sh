@@ -31,7 +31,6 @@ main() {
     forward_port 22 5922 107.170.213.32 debug.key
 
     echo "VNC server is ready, connect at 107.170.213.32 with password"
-    while true; do sleep 30; echo .; done
 }
 
 main "$@"

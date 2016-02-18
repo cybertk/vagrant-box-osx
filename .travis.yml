@@ -7,17 +7,16 @@ before_install:
 - chmod 0600 debug.key
 - ./config_vnc.sh
 install:
-# - brew install argon/mas/mas
-# - sudo gem install bundler imgurr
-# - env
-# - brew install cybertk/formulae/mas --HEAD --env=std
-# - brew install packer
-# - brew cask install virtualbox
+- brew install argon/mas/mas
+- sudo gem install bundler imgurr
+- env
+- brew install cybertk/formulae/mas --HEAD --env=std
+- brew install packer
+- brew cask install virtualbox
 
 script:
 - sw_vers
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
-- mas install 836500024
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 # - mas account
 # - mas list
@@ -28,6 +27,8 @@ script:
 - ls -l /Applications
 - ./create_box
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+
+- while true; do sleep 30; echo -n .; done
 
 notifications:
   email: false
