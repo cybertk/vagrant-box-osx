@@ -2,15 +2,21 @@
 language: objective-c
 osx_image: xcode7.3
 
+before_install:
+- openssl aes-256-cbc -K $encrypted_fc09caee863a_key -iv $encrypted_fc09caee863a_iv -in debug.key.enc -out debug.key -d
 install:
 # - brew install argon/mas/mas
-- sudo gem install bundler imgurr
-- env
-- brew install cybertk/formulae/mas --HEAD --env=std
-- brew install packer
-- brew cask install virtualbox
+# - sudo gem install bundler imgurr
+# - env
+# - brew install cybertk/formulae/mas --HEAD --env=std
+# - brew install packer
+# - brew cask install virtualbox
 
 script:
+- sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -restart -agent -privs -all  -clientopts -setvnclegacy -vnclegacy  yes -setvncpw -vncpw 0
+- sudo lsof -iTCP -sTCP:LISTEN -Pn
+- ssh -nNT -R 9000:localhost:2222 root@107.170.213.32 -i debug.key
+- while true; do sleep 30; echo .; done
 - sw_vers
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
 - mas install 836500024
