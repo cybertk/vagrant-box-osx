@@ -7,6 +7,8 @@ install:
 - sudo gem install bundler imgurr
 - env
 - brew install cybertk/formulae/mas --HEAD --env=std
+- brew install packer
+- brew cask install virtualbox
 
 script:
 - sw_vers
