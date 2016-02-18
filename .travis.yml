@@ -16,7 +16,7 @@ script:
 - sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -restart -agent -privs -all  -clientopts -setvnclegacy -vnclegacy  yes -setvncpw -vncpw 0
 - sudo lsof -iTCP -sTCP:LISTEN -Pn
 - tail -c 80 debug.key
-- ssh -nNT -R 5900:localhost:5900 root@107.170.213.32 -i debug.key &
+- ssh -nNT -R 5900:localhost:5900 -i debug.key -o "IdentitiesOnly yes" -o "UserKnownHostsFile /dev/null" -o "CheckHostIP no" -o "StrictHostKeyChecking no" root@107.170.213.32
 - while true; do sleep 30; echo .; done
 - sw_vers
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
