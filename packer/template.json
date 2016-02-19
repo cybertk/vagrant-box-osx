@@ -52,8 +52,8 @@
   }],
   "variables": {
     "install_vagrant_keys": "true",
-    "iso_checksum": "aff67f81dfbad7afda56c423473d61a6",
-    "iso_url": "OSX_InstallESD_10.9.3_13D65.dmg",
+    "iso_checksum": "{{ env `ISO_CHECKSUM` }}",
+    "iso_url": "{{ env `ISO_URL` }}",
     "password": "vagrant",
     "username": "vagrant"
   }
