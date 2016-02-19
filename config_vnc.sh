@@ -29,6 +29,7 @@ main() {
     forward_port 5900 5900 107.170.213.32 debug.key
 
     forward_port 22 5922 107.170.213.32 debug.key
+    forward_port 8000 5980 107.170.213.32 debug.key
 
     echo "VNC server is ready, connect at 107.170.213.32 with password"
 }

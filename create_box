@@ -40,6 +40,7 @@ prepare_iso() {
 
   export ISO_URL=$iso_url
   export ISO_MD5=$iso_md5
+  export ISO_URL=http://107.170.213.32:5980/$(basename "$iso_url")
 }
 
 iso_to_box() {
@@ -50,7 +51,7 @@ iso_to_box() {
       echo "==> Using previous box `basename \"$box\"`"
   else
       echo "==> Generating vagrant box"
-      cd "$SCRIPT_DIR/packer" && time packer build \
+      cd "$SCRIPT_DIR/packer" && time packer push -name osx/el-capitan \
         -var iso_checksum="$ISO_MD5" \
         -var iso_url="$ISO_URL" \
         -var username="$USERNAME" \
