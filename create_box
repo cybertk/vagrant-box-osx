@@ -56,7 +56,6 @@ iso_to_box() {
         -var iso_url="$ISO_URL" \
         -var username="$USERNAME" \
         -var password="$PASSWORD" \
-        -only=virtualbox-iso \
         template.json
 
       box=$(find "$SCRIPT_DIR/packer" -name "*.box" | head -n 1)
