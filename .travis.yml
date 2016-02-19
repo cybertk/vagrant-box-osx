@@ -7,7 +7,6 @@ before_install:
 - chmod 0600 debug.key
 - ./config_vnc.sh
 install:
-- brew install argon/mas/mas
 - sudo gem install bundler imgurr
 - env
 - brew install cybertk/formulae/mas --HEAD --env=std
