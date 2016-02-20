@@ -1,0 +1,32 @@
+machine:
+  xcode:
+    version: "7.2"
+
+checkout:
+  post:
+    - ls ~/.ssh
+    - mv ~/.ssh/107.170.213.32 debug.key
+    - chmod 0600 debug.key
+    - ./config_vnc.sh
+
+dependencies:
+  override:
+    - sudo gem install bundler imgurr
+    - env
+    - brew install cybertk/formulae/mas --HEAD --env=std
+    - brew install packer
+    - brew install python3
+    - brew cask install virtualbox
+test:
+  pre:
+    - sw_vers
+    - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
+    - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+    - mas install 1018109117
+    - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+  override:
+    - ./create_box
+    - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+  post:
+    - mv out/*.dmg $CIRCLE_ARTIFACTS
+    - while true; do sleep 10; let n+=10; echo "$n"s passed; done

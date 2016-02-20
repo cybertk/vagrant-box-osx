@@ -3,6 +3,8 @@
 forward_port() {
     declare local_port="$1" remote_port="$2" host="$3" key="$4"
 
+    # Remote port forwarding
+    # see http://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html
     openssl rsa -in "$key" -pubout -outform DER | openssl md5 -c
     ssh -nNT \
         -f \
@@ -18,6 +20,7 @@ forward_port() {
 setup_vnc() {
     declare password="$1"
 
+    # Configuring remotely via command line (kickstart), see https://support.apple.com/en-us/HT201710
     sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart \
         -activate -configure -access -on -restart -agent -privs -all \
         -clientopts -setvnclegacy -vnclegacy yes -setvncpw -vncpw "$password"
