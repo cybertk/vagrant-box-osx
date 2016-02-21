@@ -42,10 +42,11 @@ before_deploy:
 
 deploy:
   provider: bintray
-  user: cybertk
+  user: quanlong
   key: '$BINTRAY_API_KEY'
   file: ./bintray.json
   skip_cleanup: true
+  on: bintray
 
 notifications:
   email: false
