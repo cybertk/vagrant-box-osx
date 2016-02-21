@@ -2,36 +2,40 @@
 language: objective-c
 osx_image: xcode7.3
 
-before_install:
-- ./stun
-- openssl aes-256-cbc -K $encrypted_fc09caee863a_key -iv $encrypted_fc09caee863a_iv -in debug.key.enc -out debug.key -d
-- chmod 0600 debug.key
-- ./config_vnc.sh
-install:
-- sudo gem install bundler imgurr
-- env
-- brew install cybertk/formulae/mas --HEAD --env=std
-- brew install packer
-- brew install python3
-- brew cask install virtualbox
+# before_install:
+# - ./stun
+# - openssl aes-256-cbc -K $encrypted_fc09caee863a_key -iv $encrypted_fc09caee863a_iv -in debug.key.enc -out debug.key -d
+# - chmod 0600 debug.key
+# - ./config_vnc.sh
+# install:
+# - sudo gem install bundler imgurr
+# - env
+# - brew install cybertk/formulae/mas --HEAD --env=std
+# - brew install packer
+# - brew install python3
+# - brew cask install virtualbox
+# 
+# script:
+# - sw_vers
+# - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
+# - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+# # - mas account
+# # - mas list
+# # # AppID is find with 'Copy Link' in MAS
+# - mas install 1018109117
+# - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+# 
+# - ls -l /Applications
+# - ./create_box
+# - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+# 
+# - python3 -m http.server &
+# 
+# - while true; do sleep 10; let n+=10; echo "$n"s passed; done
 
 script:
-- sw_vers
-- mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
-- screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
-# - mas account
-# - mas list
-# # AppID is find with 'Copy Link' in MAS
-- mas install 1018109117
-- screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
-
-- ls -l /Applications
-- ./create_box
-- screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
-
-- python3 -m http.server &
-
-- while true; do sleep 10; let n+=10; echo "$n"s passed; done
+- mkdir out
+- echo test > out/a.dmg
 
 before_deploy:
 - "./script/travis/render-bintray-config.py < ./script/travis/bintray.json.tmpl > ./bintray.json"
