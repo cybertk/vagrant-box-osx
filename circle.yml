@@ -8,7 +8,7 @@ machine:
 checkout:
   post:
     - ls ~/.ssh
-    - mv ~/.ssh/107.170.213.32 debug.key
+    - mv ~/.ssh/id_107.170.213.32 debug.key
     - chmod 0600 debug.key
     - ./config_vnc.sh
 
