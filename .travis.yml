@@ -33,6 +33,16 @@ script:
 
 - while true; do sleep 10; let n+=10; echo "$n"s passed; done
 
+before_deploy:
+- "./script/travis/render-bintray-config.py < ./script/travis/bintray.json.tmpl > ./bintray.json"
+
+deploy:
+  provider: bintray
+  user: cybertk
+  key: '$BINTRAY_API_KEY'
+  file: ./bintray.json
+  skip_cleanup: true
+
 notifications:
   email: false
 
