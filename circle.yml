@@ -3,6 +3,7 @@ machine:
     version: "7.2"
   environment:
     XCODE_SCHEME: na
+    XCODE_PROJECT: na
 
 checkout:
   post:
