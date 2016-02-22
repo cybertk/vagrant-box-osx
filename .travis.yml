@@ -43,13 +43,13 @@ before_deploy:
 deploy:
   provider: bintray
   edge:
-    a:
-    b:
+    source: cybertk/dpl
+    branch: bintray
   user: quanlong
   key: '$BINTRAY_API_KEY'
   file: ./bintray.json
   skip_cleanup: true
-  on: bintray
+  on: dpl
 
 notifications:
   email: false
