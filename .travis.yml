@@ -42,6 +42,9 @@ before_deploy:
 
 deploy:
   provider: bintray
+  edge:
+    a:
+    b:
   user: quanlong
   key: '$BINTRAY_API_KEY'
   file: ./bintray.json
