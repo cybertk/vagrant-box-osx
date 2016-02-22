@@ -37,6 +37,9 @@ before_deploy:
 
 deploy:
   provider: bintray
+  edge:
+    source: cybertk/dpl
+    branch: bintray
   user: quanlong
   key: '$BINTRAY_API_KEY'
   file: ./bintray.json
