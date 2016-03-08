@@ -14,8 +14,6 @@ install:
 - brew install python3
 - brew install dropbox-uploader
 - brew cask install virtualbox
-
-script:
 - sw_vers
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD"
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
@@ -26,6 +24,7 @@ script:
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
 - ls -l /Applications
+script:
 - ./create_box
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
