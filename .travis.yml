@@ -3,6 +3,7 @@ language: objective-c
 osx_image: xcode7.3
 
 before_install:
+- brew update
 - ./stun
 - openssl aes-256-cbc -K $encrypted_fc09caee863a_key -iv $encrypted_fc09caee863a_iv -in .dropbox_uploader.enc -out ~/.dropbox_uploader -d
 install:
