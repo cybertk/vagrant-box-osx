@@ -29,7 +29,7 @@ script:
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
 #- python3 -m http.server &
-- dropbox_uploader.sh upload out/*.dmg install.dmg
+- travis_wait 120 dropbox_uploader.sh upload out/*.dmg install.dmg
 
 - while true; do sleep 10; let n+=10; echo "$n"s passed; done
 
