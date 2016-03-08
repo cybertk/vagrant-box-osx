@@ -28,11 +28,12 @@ script:
 - ./create_box
 - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
-#- python3 -m http.server &
-- travis_wait 120 dropbox_uploader.sh upload out/*.dmg install.dmg
-
-- while true; do sleep 10; let n+=10; echo "$n"s passed; done
-
 notifications:
   email: false
+
+deploy:
+  provider: script
+  script: deploy.sh
+  on:
+    branch: dpl-dropbox
 
