@@ -7,8 +7,9 @@ before_install:
 - ./stun
 - openssl aes-256-cbc -K $encrypted_fc09caee863a_key -iv $encrypted_fc09caee863a_iv -in .dropbox_uploader.enc -out ~/.dropbox_uploader -d
 install:
-- sudo gem install bundler imgurr
-- brew install cybertk/formulae/mas --HEAD --env=std
+- brew install argon/mas/mas
+# - sudo gem install bundler imgurr
+# - brew install cybertk/formulae/mas --HEAD --env=std
 - brew install packer
 - brew install dropbox-uploader
 - brew cask install virtualbox
@@ -17,12 +18,12 @@ install:
 # - mas account
 # - mas list
 # # AppID is find with 'Copy Link' in MAS
-- mas install 1018109117
-- screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+- travis_wait mas install 1018109117
+# - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
 script:
 - ./create_box
-- screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
+# - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
 notifications:
   email: false
