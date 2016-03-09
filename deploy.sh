@@ -1,3 +1,4 @@
 #!/bin/sh
 
-travis_wait dropbox_uploader.sh upload out/*.dmg install.dmg
+ls -al out
+dropbox_uploader.sh upload out/*.dmg install.dmg -p
