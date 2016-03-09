@@ -11,7 +11,9 @@ install:
 # - sudo gem install bundler imgurr
 # - brew install cybertk/formulae/mas --HEAD --env=std
 - brew install packer
-- brew install dropbox-uploader
+# - brew install dropbox-uploader
+- curl "https://raw.githubusercontent.com/cybertk/Dropbox-Uploader/chunksize/dropbox_uploader.sh" -o /usr/local/bin/dropbox_uploader.sh
+- chmod +x /usr/local/bin/dropbox_uploader.sh
 - brew cask install virtualbox
 - sw_vers
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD" || true
@@ -27,7 +29,7 @@ script:
 
 after_script:
 - ls -al out
-- dropbox_uploader.sh upload out/*.dmg install.dmg -p
+- dropbox_uploader.sh upload out/*.dmg install.dmg -c 200
 notifications:
   email: false
 
