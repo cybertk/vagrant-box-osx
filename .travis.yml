@@ -28,7 +28,7 @@ script:
 # - screencapture -Sx screenshot.jpg; imgurr upload screenshot.jpg
 
 after_script:
-- ls -al out
+- ls -ahl out
 - dropbox_uploader.sh -c 200 upload out/*.dmg install.dmg
 notifications:
   email: false
