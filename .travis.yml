@@ -14,7 +14,7 @@ install:
 # - brew install dropbox-uploader
 - curl "https://raw.githubusercontent.com/cybertk/Dropbox-Uploader/chunksize/dropbox_uploader.sh" -o /usr/local/bin/dropbox_uploader.sh
 - chmod +x /usr/local/bin/dropbox_uploader.sh
-- brew cask install virtualbox
+# - brew cask install virtualbox
 - sw_vers
 - mas signin "$APPLE_ID" "$APPLE_ID_PASSWORD" || true
 # - mas account
@@ -29,7 +29,7 @@ script:
 
 after_script:
 - ls -al out
-- dropbox_uploader.sh upload out/*.dmg install.dmg -c 200
+- dropbox_uploader.sh -c 200 upload out/*.dmg install.dmg
 notifications:
   email: false
 
