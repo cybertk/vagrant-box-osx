@@ -29,7 +29,7 @@ script:
 
 after_script:
 - ls -ahl out
-- dropbox_uploader.sh -c 150 upload out/*.dmg install.dmg
+- dropbox_uploader.sh -p -c 150 upload out/*.dmg install.dmg
 notifications:
   email: false
 
