@@ -5,8 +5,7 @@
     "guest_additions_mode": "disable",
     "guest_os_type": "MacOS1011_64",
     "hard_drive_interface": "sata",
-    "iso_checksum_type": "md5",
-    "iso_checksum": "{{user `iso_checksum`}}",
+    "iso_checksum_type": "none",
     "iso_interface": "sata",
     "iso_url": "{{user `iso_url`}}",
     "shutdown_command": "echo '{{user `username`}}'|sudo -S shutdown -h now",
@@ -53,7 +52,7 @@
   "variables": {
     "install_vagrant_keys": "true",
     "iso_checksum": "{{ env `ISO_CHECKSUM` }}",
-    "iso_url": "{{ env `ISO_URL` }}",
+    "iso_url": "https://www.dropbox.com/s/hc9wieazh1ykkd3/OSX_InstallESD_10.11.3_15D21.dmg",
     "password": "vagrant",
     "username": "vagrant"
   }
