@@ -52,7 +52,7 @@
   "variables": {
     "install_vagrant_keys": "true",
     "iso_checksum": "{{ env `ISO_CHECKSUM` }}",
-    "iso_url": "https://www.dropbox.com/s/hc9wieazh1ykkd3/OSX_InstallESD_10.11.3_15D21.dmg",
+    "iso_url": "https://www.dropbox.com/s/hc9wieazh1ykkd3/OSX_InstallESD_10.11.3_15D21.dmg?dl=1",
     "password": "vagrant",
     "username": "vagrant"
   }
