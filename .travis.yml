@@ -8,7 +8,7 @@ install:
 - brew install packer
 
 script:
-- packer push
+- packer push packer/template.json
 
 notifications:
   email: false
