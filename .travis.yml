@@ -8,7 +8,7 @@ install:
 - brew install packer
 
 script:
-- packer push packer/template.json
+- packer push -name osx/el-capitan packer/template.json
 
 notifications:
   email: false
