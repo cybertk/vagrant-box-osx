@@ -5,6 +5,7 @@
     "guest_additions_mode": "disable",
     "guest_os_type": "MacOS1011_64",
     "hard_drive_interface": "sata",
+    "headless": false,
     "iso_checksum_type": "sha256",
     "iso_checksum": "{{user `iso_checksum`}}",
     "iso_interface": "sata",
