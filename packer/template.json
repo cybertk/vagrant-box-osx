@@ -14,7 +14,7 @@
     "ssh_port": 22,
     "ssh_username": "{{user `username`}}",
     "ssh_password": "{{user `password`}}",
-    "ssh_wait_timeout": "10000s",
+    "ssh_wait_timeout": "30000s",
     "type": "virtualbox-iso",
     "vboxmanage": [
       ["modifyvm", "{{.Name}}", "--audiocontroller", "hda"],
