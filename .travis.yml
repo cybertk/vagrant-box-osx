@@ -1,11 +1,8 @@
 ---
-language: objective-c
-osx_image: xcode7.3
+sudo: false
 
-before_install:
-- brew update
 install:
-- brew install packer
+- curl -L -o p.zip https://releases.hashicorp.com/packer/0.10.1/packer_0.10.1_linux_amd64.zip && sudo unzip -d /usr/local/bin p.zip
 
 script:
 - packer push -name osx/el-capitan packer/template.json
