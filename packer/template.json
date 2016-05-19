@@ -22,7 +22,7 @@
       ["modifyvm", "{{.Name}}", "--boot2", "disk"],
       ["modifyvm", "{{.Name}}", "--chipset", "ich9"],
       ["modifyvm", "{{.Name}}", "--cpus", "2"],
-      ["modifyvm", "{{.Name}}", "--cpuidset", "00000001", "000306a9", "00020800", "80000201", "178bfbff"],
+      ["modifyvm", "{{.Name}}", "--cpuidset", "1", "000206a7", "02100800", "1fbae3bf ", "bfebfbff"],
       ["modifyvm", "{{.Name}}", "--nestedpaging", "on"],
       ["modifyvm", "{{.Name}}", "--firmware", "efi"],
       ["modifyvm", "{{.Name}}", "--hpet", "on"],
