@@ -2,10 +2,10 @@
 sudo: false
 
 install:
-- curl -L -o p.zip https://releases.hashicorp.com/packer/0.10.1/packer_0.10.1_linux_amd64.zip && sudo unzip -d /usr/local/bin p.zip
+- curl -L -o p.zip https://releases.hashicorp.com/packer/0.10.1/packer_0.10.1_linux_amd64.zip && unzip p.zip
 
 script:
-- packer push -name osx/el-capitan packer/template.json
+- ./packer push -name osx/el-capitan packer/template.json
 
 notifications:
   email: false
